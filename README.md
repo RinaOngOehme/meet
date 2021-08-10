@@ -1,11 +1,11 @@
-###Meet App###
+### Meet App ###
 
-####Project Objectives:####
+#### Project Objectives: ####
 To build a serverless, progressive web application (PWA) with React using a
 test-driven development (TDD) technique. The application uses the Google
 Calendar API to fetch upcoming events.
 
-#####FEATURE: SHOW/HIDE AN EVENT'S DETAILS#####
+##### FEATURE: SHOW/HIDE AN EVENT'S DETAILS #####
 *	Scenario 1: An event element is collapsed by default
 	As a user, I should be able first see an event element unexpanded so that I can expand on it if I would like to see more information about an event.
 
@@ -25,7 +25,7 @@ Then the user should be able to expand on an event to see more information
 When the user opens the app
 Then the user should be able to collapse on an event to hide the information
 
-#####FEATURE 3: SPECIFY NUMBER OF EVENTS#####
+##### FEATURE 3: SPECIFY NUMBER OF EVENTS #####
 *	Scenario 1: When user hasn’t specified a number, 32 is the default number
 *	As a user, I should be able to view 32 number of events in the app so that I can see at least 32 in the events list at once without specifying how many I want to see. 
 *	Given user has not specified how many events the user wants to see
@@ -38,7 +38,7 @@ Then the user should be able to see at least 32 number of events
 When the user opens the app with the number of events showing
 Then the user should be able to change the number of events the user wants to see
 
-#####FEATURE 4: USE THE APP WHEN OFFLINE#####
+##### FEATURE 4: USE THE APP WHEN OFFLINE #####
 *	Scenario 1: Show cached data when there’s no internet connection
 *	As a user, I should be able to use the app when offline so that I can see the events I viewed the last time I was online. 
 
@@ -53,7 +53,7 @@ Then the user should be able to see the last viewed events when the user is offl
 When the user tries to change settings like the city and time range
 Then the user should see an error
 
-#####FEATURE 5: DATA VISUALIZATION#####
+##### FEATURE 5: DATA VISUALIZATION #####
 *	Scenario 1: Show a chart with the number of upcoming events in each city
 *	As a user, I would like to be able to see a chart showing the upcoming events in each city so that I know what events are organized in which city
 
