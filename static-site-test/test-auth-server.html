@@ -53,7 +53,7 @@
     const getAuthURL = "https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url";
 
     getURLElement.onclick = function () {
-      fetch(getAuthURL)
+      fetch(getAuthURL, { headers: { 'Access-Control-Allow-Origin': '*' } })
         .then(function (response) {
           return response.json();
         })
