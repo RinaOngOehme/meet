@@ -28,4 +28,7 @@ describe('<NumberOfEvents /> component', () => {
   test('render ErrorAlert', () => {
     expect(NumberOfEventsWrapper.find(ErrorAlert)).toHaveLength(1)
   })
+
+
+
 });
