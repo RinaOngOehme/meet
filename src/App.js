@@ -5,7 +5,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 
-import { getEvents } from './api';
+
 
 class App extends Component {
   state = {
@@ -14,29 +14,6 @@ class App extends Component {
     infoText: '',
     locations: []
   }
-
-
-
-
-  updateEvents = (location, eventCount) => {
-    let locationEvents;
-    getEvents().then((events) => {
-      if (location === 'all' && eventCount === 0) {
-        locationEvents = events;
-      } else if (location !== 'all' && eventCount === 0) {
-        locationEvents = events.filter((event) => event.location === location);
-      } else if (location === '' && eventCount > 0) {
-        locationEvents = events.slice(0, eventCount);
-      } else if (location === '' && eventCount === '') {
-        locationEvents = events;
-      }
-      this.setState({
-        events: locationEvents,
-        numberOfEvents: eventCount,
-      });
-    });
-  };
-
 
 
 
