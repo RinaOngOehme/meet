@@ -5,11 +5,12 @@ class NumberOfEvents extends Component {
 
   state = {
     numberOfEvents: 32,
-    infoText: ''
-  }
+    infoText: '',
+  };
 
   handleInputChanged = (event) => {
     const value = event.target.value;
+
 
     if (value < 1) {
       return this.setState({
@@ -31,17 +32,18 @@ class NumberOfEvents extends Component {
   };
 
   render() {
+
     return (
       <div className="numberOfEvents">
-        <div className="errorText"><ErrorAlert text={this.state.errorText} /></div>
 
+        <p>Number of events</p>
         <input
           type="number"
           placeholder="1-32"
           value={this.state.numberOfEvents}
           className="numberInput"
           onChange={this.handleInputChanged} />
-
+        <div className="errorText"><ErrorAlert text={this.state.errorText} /></div>
       </div>
     );
   }
