@@ -9,7 +9,7 @@ describe('<NumberOfEvents /> component', () => {
 
   let NumberOfEventsWrapper;
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents />)
+    NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={(k, v) => jest.fn()} />)
   });
 
   test('render text input', () => {
@@ -29,6 +29,14 @@ describe('<NumberOfEvents /> component', () => {
     expect(NumberOfEventsWrapper.find(ErrorAlert)).toHaveLength(1)
   })
 
+  test("Change state when input changes", () => {
+    NumberOfEventsWrapper.setState({
+      numberOfEvents: 32
+    });
+    const eventObject = { target: { value: '2' } };
+    NumberOfEventsWrapper.find('.numberInput').simulate('change', eventObject);
+    expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe('2');
+  });
 
 
 });
