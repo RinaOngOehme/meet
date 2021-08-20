@@ -87,13 +87,13 @@ describe('App/> integration', () => {
   });
 
 
-  test('App to change number of events when NumberOfEvents component changes from 32 to 10', async () => {
+  test('App to change number of events when NumberOfEvents component changes from 32 to 2', async () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const locations = extractLocations(mockData);
-    NumberOfEventsWrapper.setState({ events: locations, eventCount: 10 });
+    NumberOfEventsWrapper.setState({ events: locations, eventCount: 2 });
     NumberOfEventsWrapper.find('.numberInput').simulate('change');
-    expect(NumberOfEventsWrapper.state('eventCount')).toEqual(10);
+    expect(NumberOfEventsWrapper.state('eventCount')).toEqual(2);
     AppWrapper.unmount();
   });
 
