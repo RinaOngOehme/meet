@@ -5,7 +5,7 @@ describe('show/hide an event detailds', () => {
   let page;
 
   beforeAll(async () => {
-    jest.setTimeout(80000);
+    jest.setTimeout(12000);
     browser = await puppeteer.launch({
       headless: false,
       slowMo: 250, // slow down by 250ms
@@ -26,13 +26,13 @@ describe('show/hide an event detailds', () => {
   });
 
   test('User can expand an event to see its details', async () => {
-    await page.click('.event .details-btn');
+    await page.click('.event .showMore');
     const eventDetails = await page.$('.event .eventDetails');
     expect(eventDetails).toBeDefined();
   });
 
   test('User can collapse an event to hide its details', async () => {
-    await page.click('.event .details-btn');
+    await page.click('.event .showLess');
     const eventDetails = await page.$('.event .eventDetails');
     expect(eventDetails).toBeNull();
   });
