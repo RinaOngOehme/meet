@@ -14,7 +14,7 @@ describe('show/hide an event detailds', () => {
     page = await browser.newPage();
     await page.goto('http://localhost:3000/');
     await page.waitForSelector('.event');
-  });
+  }, 80000);
 
   afterAll(() => {
     browser.close();
