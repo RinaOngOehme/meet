@@ -32,7 +32,7 @@ describe('App/> integration', () => {
     const AppEventsState = AppWrapper.state('events');
     expect(AppEventsState).not.toEqual(undefined);
     expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
-    AppWrapper.unmount();
+    //  AppWrapper.unmount();
   });
 
   test('App passes "locations" state as a prop to CitySearch', () => {
@@ -40,7 +40,7 @@ describe('App/> integration', () => {
     const AppLocationsState = AppWrapper.state('locations');
     expect(AppLocationsState).not.toEqual(undefined);
     expect(AppWrapper.find(CitySearch).props().locations).toEqual(AppLocationsState);
-    AppWrapper.unmount();
+    //  AppWrapper.unmount();
   });
 
   test('get list of events matching the city selected by the user',
