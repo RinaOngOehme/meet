@@ -56,7 +56,7 @@ describe('App/> integration', () => {
       const allEvents = await getEvents();
       const eventsToShow = allEvents.filter(event => event.location === selectedCity);
       expect(AppWrapper.state('events')).toEqual(eventsToShow);
-      AppWrapper.unmount();
+      //AppWrapper.unmount();
     });
 
   test('get list of all events when user selects "See all cities"',
@@ -66,7 +66,7 @@ describe('App/> integration', () => {
       await suggestionItems.at(suggestionItems.length - 1).simulate('click');
       const allEvents = await getEvents();
       expect(AppWrapper.state('events')).toEqual(allEvents);
-      AppWrapper.unmount();
+      //AppWrapper.unmount();
     })
 
   test('App passes numberOfEvents state as a prop to NumberOfEvents component', () => {
@@ -76,14 +76,14 @@ describe('App/> integration', () => {
     expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(
       AppNumberOfEventsState,
     );
-    AppWrapper.unmount();
+    //AppWrapper.unmount();
   });
 
   test("App to render 32 events by default", () => {
     const AppWrapper = mount(<App />);
     const numberOfEventsItems = AppWrapper.find(NumberOfEvents).find('.numberInput',);
     expect(numberOfEventsItems.props().value).toEqual(32);
-    AppWrapper.unmount();
+    //AppWrapper.unmount();
   });
 
 
@@ -94,7 +94,7 @@ describe('App/> integration', () => {
     NumberOfEventsWrapper.setState({ events: locations, eventCount: 2 });
     NumberOfEventsWrapper.find('.numberInput').simulate('change');
     expect(NumberOfEventsWrapper.state('eventCount')).toEqual(2);
-    AppWrapper.unmount();
+    //AppWrapper.unmount();
   });
 
 
