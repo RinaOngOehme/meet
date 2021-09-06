@@ -15,10 +15,9 @@ class Event extends Component {
     const event = this.props.event;
     return (
       <ul className="event">
-        <h3>Event Information</h3>
+        <li className="summary"><h3>{event.summary}</h3></li>
         <li className="status">Status: {event.status}</li>
         <li className="htmlLink">Link: {event.htmlLink}</li>
-        <li className="summary">Summary: {event.summary}</li>
         <li className="location">Location: {event.location}</li>
         <li className="start">Event Start Date and Time:{event.start.dateTime}</li>
         <li className="end">Event End Date and Time{event.end.dateTime}</li>
