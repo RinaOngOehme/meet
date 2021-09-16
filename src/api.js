@@ -25,7 +25,7 @@ export const getAccessToken = async () => {
     const code = await searchParams.get("code");
     if (!code) {
       const results = await axios.get(
-        "https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url", {
+        "https://hvi6h1lh8f.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url", {
         headers: {
           "Access-Control-Allow-Origin": "*"
         }
