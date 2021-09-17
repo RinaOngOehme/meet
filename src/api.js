@@ -25,11 +25,8 @@ export const getAccessToken = async () => {
     const code = await searchParams.get("code");
     if (!code) {
       const results = await axios.get(
-        "https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url", {
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        }
-      }
+        "https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
+
       );
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
@@ -42,7 +39,7 @@ export const getAccessToken = async () => {
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
-    'https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+    `https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
   )
     .then((res) => {
       return res.json();
@@ -87,7 +84,7 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = 'https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
+    const url = "https://dff5rv0kx0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/" + token;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
