@@ -5,6 +5,8 @@ const EventGenre = ({ events }) => {
   const [data, setData] = useState([]);
   const colors = ['#f7347a', '#5ac18e', '#4ca3dd', '#ffd700', '#808080'];
 
+  useEffect(() => { setData(() => getData()); }, [events]);
+
   const getData = () => {
     const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
     const data = genres.map((genre) => {
@@ -14,7 +16,7 @@ const EventGenre = ({ events }) => {
     return data;
   };
 
-  useEffect(() => { setData(() => getData()); }, [events]);
+
 
   return (
     <ResponsiveContainer height={400}>
