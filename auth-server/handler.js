@@ -29,21 +29,8 @@ const oAuth2Client = new google.auth.OAuth2(
   redirect_uris[0]
 );
 
-/**
- *
- * The first step in the OAuth process is to generate a URL so users can log in with
- * Google and be authorized to see your calendar. After logging in, they’ll receive a code
- * as a URL parameter.
- *
- */
 module.exports.getAuthURL = async () => {
-  /**
-   *
-   * Scopes array passed to the `scope` option. Any scopes passed must be enabled in the
-   * "OAuth consent screen" settings in your project on your Google Console. Also, any passed
-   *  scopes are the ones users will see when the consent screen is displayed to them.
-   *
-   */
+
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
@@ -60,7 +47,6 @@ module.exports.getAuthURL = async () => {
   };
 };
 
-// get accessToken
 module.exports.getAccessToken = async (event) => {
   // The values used to instantiate the OAuthClient are at the top of the file
   const oAuth2Client = new google.auth.OAuth2(
@@ -73,6 +59,7 @@ module.exports.getAccessToken = async (event) => {
 
   return new Promise((resolve, reject) => {
 
+
     oAuth2Client.getToken(code, (err, token) => {
       if (err) {
         return reject(err);
@@ -81,12 +68,11 @@ module.exports.getAccessToken = async (event) => {
     });
   })
     .then((token) => {
-      // Respond with OAuth token
+      // Respond with OAuth token 
       return {
         statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin": "*"
-          // "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify(token),
       };
@@ -96,12 +82,10 @@ module.exports.getAccessToken = async (event) => {
       console.error(err);
       return {
         statusCode: 500,
-
         body: JSON.stringify(err),
       };
     });
 };
-
 //get calendar events
 module.exports.getCalendarEvents = async (event) => {
   // The values used to instantiate the OAuthClient are at the top of the file
@@ -138,8 +122,7 @@ module.exports.getCalendarEvents = async (event) => {
       return {
         statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin": "*"
-          //  "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({
           events: results.data.items
