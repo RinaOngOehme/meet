@@ -2,6 +2,11 @@ import { mockData } from './mock-data';
 import axios from 'axios';
 import NProgress from 'nprogress';
 
+export const extractLocations = (events) => {
+  var extractLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
 
 export const checkToken = async (accessToken) => {
   const result = await fetch(
@@ -9,41 +14,24 @@ export const checkToken = async (accessToken) => {
   )
     .then((res) => res.json())
     .catch((error) => error.json());
-
   return result;
 };
 
-
-export const getAccessToken = async () => {
-  const accessToken = localStorage.getItem('access_token');
-
-  const tokenCheck = accessToken && (await checkToken(accessToken));
-
-  if (!accessToken || tokenCheck.error) {
-    await localStorage.removeItem("access_token");
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = await searchParams.get("code");
-    if (!code) {
-      const results = await axios.get(
-        "https://of3knceel2.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url", {
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        }
-      }
-
-      );
-      const { authUrl } = results.data;
-      return (window.location.href = authUrl);
-    }
-    return code && getToken(code);
+const removeQuery = () => {
+  if (window.history.pushState && window.location.pathname) {
+    var newurl =
+      window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState("", "", newurl);
+  } else {
+    newurl = window.location.protocol + "//" + window.location.host;
+    window.history.pushState("", "", newurl);
   }
-  return accessToken;
-}
+};
 
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
-    `https://of3knceel2.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
+    `https://0jnic8vzn6.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
   )
     .then((res) => {
       return res.json();
@@ -53,26 +41,6 @@ const getToken = async (code) => {
   access_token && localStorage.setItem("access_token", access_token);
 
   return access_token;
-};
-
-const removeQuery = () => {
-  if (window.history.pushState && window.location.pathname) {
-    var newurl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname;
-    window.history.pushState("", "", newurl);
-  } else {
-    newurl = window.location.protocol + "//" + window.location.host;
-    window.history.pushState("", "", newurl);
-  }
-};
-
-export const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
 };
 
 export const getEvents = async () => {
@@ -86,14 +54,15 @@ export const getEvents = async () => {
   if (!navigator.onLine) {
     const events = localStorage.getItem("lastEvents");
     NProgress.done();
-    return events ? JSON.parse(events).events : [];;
-  }
+    console.log(events);
+    return events ? JSON.parse(events).events : [];
+  };
 
   const token = await getAccessToken();
 
   if (token) {
     removeQuery();
-    const url = `https://of3knceel2.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
+    const url = `https://0jnic8vzn6.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
@@ -104,3 +73,23 @@ export const getEvents = async () => {
     return result.data.events;
   }
 };
+
+export const getAccessToken = async () => {
+  const accessToken = localStorage.getItem('access_token');
+  const tokenCheck = accessToken && (await checkToken(accessToken));
+
+  if (!accessToken || tokenCheck.error) {
+    await localStorage.removeItem("access_token");
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = await searchParams.get("code");
+    if (!code) {
+      const results = await axios.get(
+        "https://0jnic8vzn6.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
+      );
+      const { authUrl } = results.data;
+      return (window.location.href = authUrl)
+    }
+    return code && getToken(code);
+  }
+  return accessToken;
+}
